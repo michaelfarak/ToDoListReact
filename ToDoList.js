@@ -1,59 +1,148 @@
-class ToDoListItem extends React.Component {
+class DoneItem extends React.Component {
     constructor(props) {
         super(props);
+        this.returning = this.returning.bind(this)
+        this.deleteDone = this.deleteDone.bind(this)
     }
+    deleteDone(event) {
+        this.props.deleteDone(event.target.parentElement)
+    }
+    returning(event) {
+        this.props.returning(event)
+    }
+    render() {
 
-
-
-    render(){
-        {this.props.ItemList.map()}
         return (
-            <li></li>
+
+            <ul id="doneList"> Things Done dude
+                {this.props.ItemDoneList.map((NewItemDone) => <li key={NewItemDone.key}>{NewItemDone.text.slice(0, (NewItemDone.text.length - 2))}<button onClick={this.deleteDone}>x</button><button onClick={this.returning}>r</button></li>)}
+            </ul>
+
+
         )
     }
 }
 
-
-
-
-
-
-class ToDoList extends React.Component {
-    constructor(props){
+class ToDoListItem extends React.Component {
+    constructor(props) {
         super(props);
+        this.handleClick = this.handleClick.bind(this)
+        this.checkItems = this.checkItems.bind(this)
+        this.returnItems = this.returnItems.bind(this)
+        this.deleteDoneItems = this.deleteDoneItems.bind(this)
         this.state = {
-            numOfItems : 0,
-            ItemList : [],
+            numOfItemsDone: 0,
+            ItemDoneList: [],
         }
-        this.AddItem = this.AddItem.bind(this),
+
     }
-    
-    AddItem() {
-        var NewItem = this.state.ItemList;
-        NewItem.push(<li></li>);
-        this.setState ({
-            ItemList: NewItem,
+    deleteDoneItems(event) {
+        event.remove()
+    }
+
+    checkItems(event) {
+        var NewItemDone = {
+            text: event.target.parentElement.textContent,
+            key: this.state.numOfItemsDone
+        };
+        this.state.ItemDoneList.push(NewItemDone)
+        this.setState({
+            ItemDoneList: this.state.ItemDoneList,
         })
-        this.state.numOfItems = this.state.numOfItems +1;
+        this.state.numOfItemsDone = this.state.numOfItemsDone + 1;
+
+        event.target.parentElement.remove(); // remove when checked
+    }
+
+    returnItems(event) {
+        this.props.returnItems(event);
     }
 
 
+    handleClick(event) {
+        this.props.handleClick(event.target.parentElement)//delete
+    }
 
-    render(){
-        return(
+    render() {
+
+        return (
             <div>
-                <input id="InputToDo" type="text" placeholder="enter things to do"/>
-                <button id="InputBtn" type="submit">Add to list</button>
-                <ul>
-                    <ToDoListItem/>
+                <ul id="doList">Things to do dude
+        {this.props.ItemList.map((NewItem) => <li key={NewItem.key}>{NewItem.text}<button onClick={this.checkItems}>v</button><button onClick={this.handleClick}>x</button></li>)}
                 </ul>
+                <DoneItem deleteDone={this.deleteDoneItems} returning={this.returnItems} ItemDoneList={this.state.ItemDoneList} />
             </div>
         )
     }
+}
 
+class ToDoList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.AddItem = this.AddItem.bind(this)
+        this.delete = this.delete.bind(this)
+        this.ReturnFromDone = this.ReturnFromDone.bind(this)
+        this.state = {
+            numOfItems: 0,
+            ItemList: [],
+        }
+    }
 
+    ReturnFromDone(event) {
+        var returnItem = {
+            text: event.target.parentElement.textContent.slice(0, (event.target.parentElement.textContent.length - 2)),
+            key: this.state.numOfItems
+        }
+        this.state.ItemList.push(returnItem)
+        this.setState({
+            ItemList: this.state.ItemList,
+        })
+        this.state.numOfItems = this.state.numOfItems + 1;
+        event.target.parentElement.remove()
 
+    }
 
+    AddItem(event) {
+        event.preventDefault();
+        if (this.textInput.value != "") {
+            var NewItem = {
+                text: this.textInput.value,
+                key: this.state.numOfItems
+            };
+            this.state.ItemList.push(NewItem)
+            this.setState({
+                ItemList: this.state.ItemList,
+            })
+            this.state.numOfItems = this.state.numOfItems + 1;
+            this.textInput.value = "";
+        } else {
+            null;
+        }
+    }
+
+    delete(event) {
+        event.remove()
+    }
+
+    render() {
+        return (
+            <div>
+                <nav id="header" class="navbar navbar-light">
+                    <a class="navbar-brand" href="#">
+                        <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
+                        Bootstrap
+                    </a>
+                </nav>
+                <div id="container">
+                    <input ref={input => { this.textInput = input; }} id="InputToDo" type="text" placeholder="enter things to do" />
+                    <button onClick={this.AddItem} id="InputBtn" type="submit">Add to list</button>
+                    <ToDoListItem returnItems={this.ReturnFromDone} handleClick={this.delete} ItemList={this.state.ItemList}>
+
+                    </ToDoListItem>
+                </div>
+            </div>
+        )
+    }
 }
 
 class App extends React.Component {
@@ -63,7 +152,7 @@ class App extends React.Component {
 
     render() {
         return (
-                <ToDoList/>
+            <ToDoList />
         );
     }
 }

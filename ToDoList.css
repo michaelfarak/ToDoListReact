@@ -1,0 +1,59 @@
+body{
+background-image: url("https://c.pxhere.com/photos/40/66/drawing_pad_note_pad_white_background_pen_blank_pad_business_paper-652303.jpg!d");
+background-size: cover;
+background-position: center;
+background-repeat: no-repeat;
+background-attachment: fixed;
+}
+
+#header {
+    opacity: 0.6;
+    background-color:#ce6114;
+}
+
+#doList li {
+    border:2px black solid;
+    display:block;
+    height:auto;
+    width:200px;
+    border-radius:30px;
+    margin-bottom: 10px; 
+}
+
+#doList {
+    position:relative;
+    right:80%;
+    text-align: center;
+    display:block;
+    top: 35px;
+}
+
+
+#InputToDo{
+    display:inline-block;
+}
+
+#InputBtn{
+    display:inline-block;
+}
+
+#doneList li {
+    border:2px black solid;
+    display:block;
+    height:auto;
+    width:200px;
+    border-radius:30px;
+    margin-bottom: 10px; 
+}
+
+#doneList {
+    position:relative;
+    left:80%;
+    text-align: center;
+    display:block;
+}
+
+#container{
+    margin: auto;
+    width: 25%;
+}
