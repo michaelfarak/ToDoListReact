@@ -129,8 +129,8 @@ class ToDoList extends React.Component {
             <div>
                 <nav id="header" class="navbar navbar-light">
                     <a class="navbar-brand" href="#">
-                        <img src="/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
-                        Bootstrap
+                        <img src="http://www.pngmart.com/files/2/Duck-PNG-Clipart.png" width="30" height="30" class="d-inline-block align-top" alt="" />
+                       <span id="title">Ducket List</span> 
                     </a>
                 </nav>
                 <div id="container">

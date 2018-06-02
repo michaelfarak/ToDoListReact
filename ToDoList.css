@@ -1,3 +1,13 @@
+@font-face {
+    font-family: Allura;
+    src: url(./images/Allura-Regular.ttf);
+}
+
+@font-face {
+    font-family: Aurore;
+    src: url(./images/LaBelleAurore.ttf);
+}
+
 body{
 background-image: url("https://c.pxhere.com/photos/40/66/drawing_pad_note_pad_white_background_pen_blank_pad_business_paper-652303.jpg!d");
 background-size: cover;
@@ -6,11 +16,25 @@ background-repeat: no-repeat;
 background-attachment: fixed;
 }
 
+#header, #container{
+    font-family: Allura;
+}
+
+
 #header {
     opacity: 0.6;
     background-color:#ce6114;
 }
 
+#title {
+    font-size: 55px;
+    font-weight: bold;
+}
+
+#header img {
+    width: 75px;
+    height: 75px;
+}
 .fa-check-circle{
     background-color: green;
 }
@@ -28,9 +52,12 @@ background-attachment: fixed;
     width:200px;
     border-radius:30px;
     margin-bottom: 10px; 
+    font-size: 30px;
+    font-family: Aurore;
 }
 
 #doList {
+    font-size: 50px;
     position:relative;
     right:80%;
     text-align: center;
@@ -39,13 +66,13 @@ background-attachment: fixed;
 }
 
 
-#InputToDo{
+#InputToDo, #InputBtn{
     display:inline-block;
+    font-size: 30px;
+    font-family: Aurore;
 }
 
-#InputBtn{
-    display:inline-block;
-}
+
 
 #doneList li {
     border:2px black solid;
@@ -54,9 +81,13 @@ background-attachment: fixed;
     width:200px;
     border-radius:30px;
     margin-bottom: 10px; 
+    font-size: 30px;
+    font-family: Aurore;
+
 }
 
 #doneList {
+    font-size: 50px;
     position:relative;
     left:80%;
     text-align: center;
