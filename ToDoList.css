@@ -11,31 +11,39 @@ background-attachment: fixed;
     background-color:#ce6114;
 }
 
+ul{
+    font-weight: 800;
+}
+
 .fa-check-circle{
     background-color: green;
+    float: right;
 }
 .fa-trash{
     background-color: red;
+    float: right;
 }
 .fa-arrow-circle-left{
     background-color: blue;
+        float: right;
 }
 
 #doList li {
     border:2px black solid;
     display:block;
     height:auto;
-    width:200px;
+    width:300px;
     border-radius:30px;
     margin-bottom: 10px; 
+    font-weight: 400;
 }
 
 #doList {
     position:relative;
-    right:80%;
     text-align: center;
-    display:block;
     top: 35px;
+    right: 55px;
+    padding: 16px;
 }
 
 
@@ -51,16 +59,18 @@ background-attachment: fixed;
     border:2px black solid;
     display:block;
     height:auto;
-    width:200px;
+    width:300px;
     border-radius:30px;
     margin-bottom: 10px; 
+    font-weight: 400;
 }
 
 #doneList {
     position:relative;
-    left:80%;
+    top:80px;
     text-align: center;
-    display:block;
+    right: 55px;
+    padding: 16px;
 }
 
 #container{

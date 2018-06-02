@@ -5,7 +5,7 @@ class DoneItem extends React.Component {
         this.deleteDone = this.deleteDone.bind(this)
     }
     deleteDone(event) {
-        this.props.deleteDone(event.target.parentElement)
+        this.props.deleteDone(event)
     }
     returning(event) {
         this.props.returning(event)
@@ -15,7 +15,7 @@ class DoneItem extends React.Component {
         return (
 
             <ul id="doneList"> Things Done dude
-                {this.props.ItemDoneList.map((NewItemDone) => <li key={NewItemDone.key}>{NewItemDone.text + `     ` }<button className="fa fa-arrow-circle-left" onClick={this.returning}></button><button className="fa fa-trash" onClick={this.deleteDone}></button></li>)}
+                {this.props.ItemDoneList.map((NewItemDone) => <li key={NewItemDone.key}>{NewItemDone.text}<button className="fa fa-arrow-circle-left" onClick={this.returning}></button><button id={NewItemDone.key} className="fa fa-trash" onClick={this.deleteDone}></button></li>)}
             </ul>
 
 
@@ -37,7 +37,11 @@ class ToDoListItem extends React.Component {
 
     }
     deleteDoneItems(event) {
-        event.remove()
+        event.target.parentElement.remove()
+        var updatesDone = JSON.parse(localStorage.getItem("listOfTaskDone"))
+        updatesDone.splice(event.target.id,1)
+        var updateDone =JSON.stringify(updatesDone)
+        localStorage.setItem("listOfTaskDone", updateDone);
     }
 
     checkItems(event) {
@@ -58,19 +62,33 @@ class ToDoListItem extends React.Component {
         this.props.returnItems(event);
     }
 
+    componentWillMount(){
+        localStorage.getItem("listOfTaskDone") && this.setState({
+            ItemDoneList: JSON.parse(localStorage.getItem("listOfTaskDone"))
+        })
+    }
+
+    componentDidUpdate(nextProps, nextState){
+        localStorage.setItem("listOfTaskDone",JSON.stringify(this.state.ItemDoneList))
+    }
+
 
     handleClick(event) {
-        this.props.handleClick(event.target.parentElement)//delete
+        console.log(event)
+        this.props.handleClick(event)//delete
     }
 
     render() {
 
         return (
+
             <div>
                 <ul id="doList">Things to do dude
-        {this.props.ItemList.map((NewItem) => <li key={NewItem.key}>{NewItem.text}<button className="fa fa-check-circle" onClick={this.checkItems}></button><button className="fa fa-trash" onClick={this.handleClick}></button></li>)}
+        {this.props.ItemList.map((NewItem) => <li key={NewItem.key}>{NewItem.text}<button className="fa fa-check-circle" onClick={this.checkItems}></button><button id={NewItem.key} className="fa fa-trash" onClick={this.handleClick}></button></li>)}
                 </ul>
-                <DoneItem deleteDone={this.deleteDoneItems} returning={this.returnItems} ItemDoneList={this.state.ItemDoneList} />
+                <div>
+                    <DoneItem deleteDone={this.deleteDoneItems} returning={this.returnItems} id={this.state.numOfItemsDone} ItemDoneList={this.state.ItemDoneList} />
+                </div>
             </div>
         )
     }
@@ -121,8 +139,25 @@ class ToDoList extends React.Component {
     }
 
     delete(event) {
-        event.remove()
+        console.log(event.target.id)
+        event.target.parentElement.remove()
+        var updates = JSON.parse(localStorage.getItem("listOfTask"))
+        updates.splice(event.target.id,1)
+        var update =JSON.stringify(updates)
+        localStorage.setItem("listOfTask", update);
+       
     }
+    componentWillMount(){
+        localStorage.getItem("listOfTask") && this.setState({
+            ItemList: JSON.parse(localStorage.getItem("listOfTask"))
+        })
+    }
+
+    componentDidUpdate(nextProps, nextState){
+        localStorage.setItem("listOfTask",JSON.stringify(this.state.ItemList))
+    }
+
+
 
     render() {
         return (
@@ -136,7 +171,7 @@ class ToDoList extends React.Component {
                 <div id="container">
                     <input ref={input => { this.textInput = input; }} id="InputToDo" type="text" placeholder="enter things to do" />
                     <button onClick={this.AddItem} id="InputBtn" type="submit">Add to list</button>
-                    <ToDoListItem returnItems={this.ReturnFromDone} handleClick={this.delete} ItemList={this.state.ItemList}>
+                    <ToDoListItem returnItems={this.ReturnFromDone} handleClick={this.delete} id={this.state.numOfItems} ItemList={this.state.ItemList}>
 
                     </ToDoListItem>
                 </div>
