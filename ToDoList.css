@@ -11,6 +11,16 @@ background-attachment: fixed;
     background-color:#ce6114;
 }
 
+.fa-check-circle{
+    background-color: green;
+}
+.fa-trash{
+    background-color: red;
+}
+.fa-arrow-circle-left{
+    background-color: blue;
+}
+
 #doList li {
     border:2px black solid;
     display:block;

@@ -15,7 +15,7 @@ class DoneItem extends React.Component {
         return (
 
             <ul id="doneList"> Things Done dude
-                {this.props.ItemDoneList.map((NewItemDone) => <li key={NewItemDone.key}>{NewItemDone.text.slice(0, (NewItemDone.text.length - 2))}<button onClick={this.deleteDone}>x</button><button onClick={this.returning}>r</button></li>)}
+                {this.props.ItemDoneList.map((NewItemDone) => <li key={NewItemDone.key}>{NewItemDone.text + `     ` }<button className="fa fa-arrow-circle-left" onClick={this.returning}></button><button className="fa fa-trash" onClick={this.deleteDone}></button></li>)}
             </ul>
 
 
@@ -68,7 +68,7 @@ class ToDoListItem extends React.Component {
         return (
             <div>
                 <ul id="doList">Things to do dude
-        {this.props.ItemList.map((NewItem) => <li key={NewItem.key}>{NewItem.text}<button onClick={this.checkItems}>v</button><button onClick={this.handleClick}>x</button></li>)}
+        {this.props.ItemList.map((NewItem) => <li key={NewItem.key}>{NewItem.text}<button className="fa fa-check-circle" onClick={this.checkItems}></button><button className="fa fa-trash" onClick={this.handleClick}></button></li>)}
                 </ul>
                 <DoneItem deleteDone={this.deleteDoneItems} returning={this.returnItems} ItemDoneList={this.state.ItemDoneList} />
             </div>
@@ -90,7 +90,7 @@ class ToDoList extends React.Component {
 
     ReturnFromDone(event) {
         var returnItem = {
-            text: event.target.parentElement.textContent.slice(0, (event.target.parentElement.textContent.length - 2)),
+            text: event.target.parentElement.textContent,
             key: this.state.numOfItems
         }
         this.state.ItemList.push(returnItem)
