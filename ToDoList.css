@@ -24,6 +24,8 @@ background-attachment: fixed;
 #header {
     opacity: 0.6;
     background-color:#ce6114;
+    height: 70px;
+    justify-content: flex-end;
 }
 
 ul{
@@ -50,6 +52,9 @@ ul{
 .fa-arrow-circle-left{
     background-color: blue;
         float: right;
+}
+.fa{
+    border-radius:50%;
 }
 
 #doList li {
@@ -80,6 +85,9 @@ ul{
 }
 
 
+    #input{
+    display:inline-grid;
+    }
 
 #doneList li {
     border:2px black solid;

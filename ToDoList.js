@@ -37,10 +37,11 @@ class ToDoListItem extends React.Component {
 
     }
     deleteDoneItems(event) {
+        console.log(event.target.id)
         event.target.parentElement.remove()
         var updatesDone = JSON.parse(localStorage.getItem("listOfTaskDone"))
-        updatesDone.splice(event.target.id,1)
-        var updateDone =JSON.stringify(updatesDone)
+        updatesDone.splice(event.target.id, 1)
+        var updateDone = JSON.stringify(updatesDone)
         localStorage.setItem("listOfTaskDone", updateDone);
     }
 
@@ -62,14 +63,14 @@ class ToDoListItem extends React.Component {
         this.props.returnItems(event);
     }
 
-    componentWillMount(){
+    componentWillMount() {
         localStorage.getItem("listOfTaskDone") && this.setState({
             ItemDoneList: JSON.parse(localStorage.getItem("listOfTaskDone"))
         })
     }
 
-    componentDidUpdate(nextProps, nextState){
-        localStorage.setItem("listOfTaskDone",JSON.stringify(this.state.ItemDoneList))
+    componentDidUpdate(nextProps, nextState) {
+        localStorage.setItem("listOfTaskDone", JSON.stringify(this.state.ItemDoneList))
     }
 
 
@@ -141,23 +142,20 @@ class ToDoList extends React.Component {
     delete(event) {
         console.log(event.target.id)
         event.target.parentElement.remove()
-        var updates = JSON.parse(localStorage.getItem("listOfTask"))
-        updates.splice(event.target.id,1)
-        var update =JSON.stringify(updates)
-        localStorage.setItem("listOfTask", update);
-       
+        var update = JSON.parse(localStorage.getItem("listOfTask"))
+        update.splice(event.target.id)
+        var updates = JSON.stringify(update)
+        localStorage.setItem("listOfTask", updates);
     }
-    componentWillMount(){
+    componentWillMount() {
         localStorage.getItem("listOfTask") && this.setState({
             ItemList: JSON.parse(localStorage.getItem("listOfTask"))
         })
     }
-
-    componentDidUpdate(nextProps, nextState){
-        localStorage.setItem("listOfTask",JSON.stringify(this.state.ItemList))
+ 
+    componentDidUpdate(nextProps, nextState) {
+        localStorage.setItem("listOfTask", JSON.stringify(this.state.ItemList))
     }
-
-
 
     render() {
         return (
@@ -165,12 +163,14 @@ class ToDoList extends React.Component {
                 <nav id="header" class="navbar navbar-light">
                     <a class="navbar-brand" href="#">
                         <img src="http://www.pngmart.com/files/2/Duck-PNG-Clipart.png" width="30" height="30" class="d-inline-block align-top" alt="" />
-                       <span id="title">Ducket List</span> 
+                        <span id="title">Ducket List</span>
                     </a>
                 </nav>
                 <div id="container">
-                    <input ref={input => { this.textInput = input; }} id="InputToDo" type="text" placeholder="enter things to do" />
-                    <button onClick={this.AddItem} id="InputBtn" type="submit">Add to list</button>
+                    <div id="input">
+                        <input ref={input => { this.textInput = input; }} id="InputToDo" type="text" placeholder="enter things to do" />
+                        <button onClick={this.AddItem} id="InputBtn" type="submit">Add to list</button>
+                    </div>
                     <ToDoListItem returnItems={this.ReturnFromDone} handleClick={this.delete} id={this.state.numOfItems} ItemList={this.state.ItemList}>
 
                     </ToDoListItem>
