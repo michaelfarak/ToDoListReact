@@ -14,7 +14,7 @@ class DoneItem extends React.Component {
 
         return (
 
-            <ul id="doneList"> Things Done dude
+            <ul id="doneList"> Done Tasks
                 {this.props.ItemDoneList.map((NewItemDone) => <li key={NewItemDone.key}>{NewItemDone.text}<button className="fa fa-arrow-circle-left" onClick={this.returning}></button><button id={NewItemDone.key} className="fa fa-trash" onClick={this.deleteDone}></button></li>)}
             </ul>
 
@@ -84,7 +84,8 @@ class ToDoListItem extends React.Component {
         return (
 
             <div>
-                <ul id="doList">Things to do dude
+                
+                <ul id="doList">Task List
         {this.props.ItemList.map((NewItem) => <li key={NewItem.key}>{NewItem.text}<button className="fa fa-check-circle" onClick={this.checkItems}></button><button id={NewItem.key} className="fa fa-trash" onClick={this.handleClick}></button></li>)}
                 </ul>
                 <div>
@@ -168,8 +169,8 @@ class ToDoList extends React.Component {
                 </nav>
                 <div id="container">
                     <div id="input">
-                        <input ref={input => { this.textInput = input; }} id="InputToDo" type="text" placeholder="enter things to do" />
-                        <button onClick={this.AddItem} id="InputBtn" type="submit">Add to list</button>
+                        <input ref={input => { this.textInput = input; }} id="InputToDo" type="text" placeholder="Type a new task" />
+                        <button onClick={this.AddItem} id="InputBtn" type="submit">Add to task list</button>
                     </div>
                     <ToDoListItem returnItems={this.ReturnFromDone} handleClick={this.delete} id={this.state.numOfItems} ItemList={this.state.ItemList}>
 
