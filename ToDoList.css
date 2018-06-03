@@ -20,7 +20,6 @@ background-attachment: fixed;
     font-family: Allura;
 }
 
-
 #header {
     opacity: 0.6;
     background-color:black;
@@ -77,12 +76,12 @@ ul{
     padding: 16px;
 }
 
-
 #InputToDo, #InputBtn{
     display:inline-block;
     font-size: 30px;
     font-family: Aurore;
 }
+
 #InputBtn {
     background: #d9bc94;
     border-radius: 7px;
